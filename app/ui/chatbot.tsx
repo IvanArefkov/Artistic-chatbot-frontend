@@ -20,11 +20,12 @@ export default function Chatbot(){
    
 
 
-    function handleKeyEvent(e:KeyboardEvent<HTMLTextAreaElement>){
-        if (e.key === "Enter"){
-            handleSendMessage()
-        }
-    }
+    // function handleKeyEvent(e:KeyboardEvent<HTMLTextAreaElement>){
+    //     if (e.key === "Enter"){
+    //         handleSendMessage()
+    //         setinputValue(''.trim())
+    //     }
+    // }
 
     
     async function handleSendMessage (){
@@ -34,12 +35,12 @@ export default function Chatbot(){
          }
         
          const userMessage = inputValue
-         setinputValue('')
          setIsLoading(true)
          setMessages(prev => [...prev, {
             sender: 'User',
             content: userMessage,
          }])
+         setinputValue(''.trim())
          try {
             const response = await fetch(`${API_URL}`, {
                 method: 'POST',
@@ -112,7 +113,7 @@ export default function Chatbot(){
 
            </div>
            <div className='min-h-18 flex justify-between px-4' style={{backgroundColor: 'white'}}>
-                <textarea onKeyDown={handleKeyEvent} value={inputValue} onChange={e=>setinputValue(e.target.value)} id="user-input" placeholder='Напишите свой вопрос...' className={`w-fit flex-1 my-3 me-2 ${fira_sans.className}`} style={{resize: 'none'}} />
+                <textarea value={inputValue} onChange={e=>setinputValue(e.target.value)} id="user-input" placeholder='Напишите свой вопрос...' className={`w-fit flex-1 border-b-1 border-b-gray-400 my-3 me-2 ${fira_sans.className}`} style={{resize: 'none'}} />
                 <button onClick={handleSendMessage} disabled={isLoading} className='border p-3 h-fit self-center text-gray-500 border-gray-400 hover:cursor-pointer hover:bg-[#B29D78] hover:border-0 hover:text-white'>Отправить</button>
            </div>
         </div>
