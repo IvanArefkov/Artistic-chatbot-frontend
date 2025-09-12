@@ -1,8 +1,9 @@
 
 import Title from "./ui/title";
-import Chatbot from "./ui/chatbot";
+import dynamic from "next/dynamic";
 
 export default function Home() {
+  const Chatbot = dynamic(()=> import("./ui/chatbot"))
   return (
     <div className="w-screen h-screen flex justify-center items-center bg-gray-600">
       <Title />

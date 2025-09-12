@@ -28,7 +28,7 @@ export default function Chatbot(){
 
     
     async function handleSendMessage (){
-         if (!inputValue.trim() || isLoading) {
+         if (!inputValue.trim()) {
             setinputValue('')
             return
          }
