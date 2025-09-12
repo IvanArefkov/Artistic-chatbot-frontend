@@ -12,12 +12,11 @@ export default function Title (){
     const titleRef = useRef(null)
     const titleDivRef = useRef<HTMLDivElement>(null)
 
-    
-        document.fonts.ready.then(()=>{
-            useGSAP(()=>{
-        const split = SplitText.create(titleRef.current,{
+    useGSAP(()=>{
+        const animateTitle = ()=>{
+            const split = SplitText.create(titleRef.current,{
         type: 'chars'
-    })
+        })
         const tl = gsap.timeline()
         .to(split.chars,{
             ease: 'power1.out',
@@ -30,12 +29,16 @@ export default function Title (){
             stagger: 0.02,
             onComplete:()=>{
                 if (titleDivRef.current){
-                     titleDivRef.current.remove()
+                    titleDivRef.current.remove()
                 }
             }
         },'<50%')
-    })
-})
+        }
+        if (typeof document !=='undefined'){
+            document.fonts.ready.then(animateTitle)
+        }
+        },{ scope:  titleDivRef })
+            
     
     return (
         <div ref={titleDivRef} className="flex h-full w-full justify-center absolute">
