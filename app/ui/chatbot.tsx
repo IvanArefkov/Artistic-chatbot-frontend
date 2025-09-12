@@ -9,7 +9,7 @@ import type { MessageType } from '@/app/ui/message'
 gsap.registerPlugin(useGSAP)
 
 
-
+const API_URL = process.env.NEXT_PUBLIC_API_URL
 
 export default function Chatbot(){
 
@@ -32,7 +32,7 @@ export default function Chatbot(){
             setinputValue('')
             return
          }
-        const API_URL = process.env.NEXT_PUBLIC_API_URL
+        
          const userMessage = inputValue
          setinputValue('')
          setIsLoading(true)
