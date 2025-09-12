@@ -75,15 +75,19 @@ export default function Chatbot(){
 
     const chatRef = useRef(null)
 
-   
-    useGSAP(()=>{
-        gsap.from(chatRef.current,{
+   useEffect(() => {
+    const animateAfterFonts = async () => {
+        await document.fonts.ready
+        gsap.from(chatRef.current, {
             autoAlpha: 0,
             duration: 2,
             ease: 'power2.out',
-            delay: 3.5,
+            delay: 0.5,
         })
-    })
+    }
+    
+    animateAfterFonts()
+}, [])
 
     return(
         <div ref={chatRef} className="chat-wrapper h-140 max-h-screen w-92 flex flex-col" style={{backgroundColor: 'var(--base-custom)'}}>
