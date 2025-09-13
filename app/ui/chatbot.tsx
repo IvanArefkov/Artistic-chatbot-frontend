@@ -113,7 +113,7 @@ export default function Chatbot(){
 
            </div>
            <div className='min-h-18 flex justify-between px-4' style={{backgroundColor: 'white'}}>
-                <textarea value={inputValue} onChange={e=>setinputValue(e.target.value)} id="user-input" placeholder='Напишите свой вопрос...' className={`w-fit flex-1 border-b-1 border-b-gray-400 my-3 me-2 ${fira_sans.className}`} style={{resize: 'none'}} />
+                <textarea value={inputValue} onChange={e=>setinputValue(e.target.value)} id="user-input" placeholder='Напишите свой вопрос...' className={`w-fit flex-1 text-gray-700 border-b-1 border-b-gray-400 my-3 me-2 ${fira_sans.className}`} style={{resize: 'none'}} />
                 <button onClick={handleSendMessage} disabled={isLoading} className='border p-3 h-fit self-center text-gray-500 border-gray-400 hover:cursor-pointer hover:bg-[#B29D78] hover:border-0 hover:text-white'>Отправить</button>
            </div>
         </div>
