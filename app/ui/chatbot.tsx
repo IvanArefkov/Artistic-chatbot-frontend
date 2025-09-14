@@ -33,13 +33,19 @@ export default function Chatbot(){
             setinputValue('')
             return
          }
-        
-         const userMessage = inputValue
+
          setIsLoading(true)
          setMessages(prev => [...prev, {
             sender: 'User',
-            content: userMessage,
+            content: inputValue,
          }])
+
+         const lastNMessages = messages.slice(-10) //get last 10 messages context
+         const messageHistory = lastNMessages.reduce((accumulator, currentValue)=>{
+            return accumulator + `Отправитель: ${currentValue.sender}, Сообщение: ${currentValue.content}`
+         },'')
+         const userMessage = inputValue
+
          setinputValue(''.trim())
          try {
             const response = await fetch(`${API_URL}`, {
@@ -48,6 +54,7 @@ export default function Chatbot(){
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
+                    history: messageHistory,
                     message: userMessage
                 })
             })
