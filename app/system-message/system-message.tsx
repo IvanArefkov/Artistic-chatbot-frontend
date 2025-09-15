@@ -54,7 +54,6 @@ export default function SystemMessageComponent({token}:SystemMessageProps ){
         try {
             const formData = new FormData()
             formData.append('message', currentSection.value)
-            formData.append('prompt',currentSection.label)
             const response = await fetch(`${apiUrl}/edit-system-message`,{
                 method: 'post',
                 body: formData,
@@ -63,6 +62,7 @@ export default function SystemMessageComponent({token}:SystemMessageProps ){
                 }
             })
             if (response.ok){
+                const responseMessage = await response.json()
                 alert('Successfully updated!')
             }
         }
@@ -95,7 +95,7 @@ export default function SystemMessageComponent({token}:SystemMessageProps ){
             }
         }
         getSystemMessage()
-    },[token,apiUrl])
+    },[token])
 
     return (
         <div className={`min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 ${spectral.className}`}>
@@ -179,7 +179,9 @@ export default function SystemMessageComponent({token}:SystemMessageProps ){
                                 )}
                             </button>
                             
-                            
+                            <div className="text-sm text-gray-400">
+                                Last modified: {new Date().toLocaleDateString()}
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -191,7 +193,7 @@ export default function SystemMessageComponent({token}:SystemMessageProps ){
                             ⚙️ System Message
                         </h3>
                         <p className="text-sm text-gray-300">
-                            Core instructions that define the AI agent's behavior and personality
+                            Core instructions that define the AI agent&apos;s behavior and personality
                         </p>
                     </div>
                     <div className="bg-gray-800 rounded-lg border border-gray-700 p-4">
