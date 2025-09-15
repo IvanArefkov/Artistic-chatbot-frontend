@@ -32,7 +32,7 @@ export default function Title (){
                     titleDivRef.current.remove()
                 }
             }
-        },'<50%')
+        },'<49%')
         }
         if (typeof document !=='undefined'){
             document.fonts.ready.then(animateTitle)
