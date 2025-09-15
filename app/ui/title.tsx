@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import {spectral} from "@/app/fonts"
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';

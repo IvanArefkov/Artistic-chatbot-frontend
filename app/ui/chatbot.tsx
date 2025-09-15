@@ -4,7 +4,7 @@ import { spectral, fira_sans } from "@/app/fonts"
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import Message from './message';
-import { useState, KeyboardEvent } from 'react';
+import { useState } from 'react';
 import type { MessageType } from '@/app/ui/message'
 gsap.registerPlugin(useGSAP)
 
@@ -17,15 +17,6 @@ export default function Chatbot(){
     const [inputValue, setinputValue] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const bottomRef = useRef<HTMLDivElement>(null)
-   
-
-
-    // function handleKeyEvent(e:KeyboardEvent<HTMLTextAreaElement>){
-    //     if (e.key === "Enter"){
-    //         handleSendMessage()
-    //         setinputValue(''.trim())
-    //     }
-    // }
 
     
     async function handleSendMessage (){
@@ -48,7 +39,7 @@ export default function Chatbot(){
 
          setinputValue(''.trim())
          try {
-            const response = await fetch(`${API_URL}`, {
+            const response = await fetch(`${API_URL}/chat`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
