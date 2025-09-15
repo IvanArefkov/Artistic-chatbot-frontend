@@ -95,7 +95,7 @@ export default function SystemMessageComponent({token}:SystemMessageProps ){
             }
         }
         getSystemMessage()
-    },[token])
+    },[token,apiUrl])
 
     return (
         <div className={`min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 ${spectral.className}`}>
