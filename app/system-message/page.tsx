@@ -1,8 +1,8 @@
 'use client'
-import { spectral, fira_sans } from "@/app/fonts"
+
 import { FormEvent, useEffect, useState } from "react";
 import SystemMessageComponent from './system-message'
-export default function edit_system_message(){
+export default function EditSystemMessage(){
 
     const [user, setUser] = useState<string>('')
     const [password, setPassword] = useState<string>('')
@@ -37,7 +37,7 @@ export default function edit_system_message(){
         if (localToken){
             setToken(localToken)
         }
-    },[])
+    })
     
     return (
     <div className="bg-gray-800 h-screen text-white">
