@@ -1,5 +1,8 @@
 'use client'
-
+type tokenDataType = {
+    token: string,
+    expiration: Date
+} 
 import { FormEvent, useEffect, useState } from "react";
 import SystemMessageComponent from './system-message'
 export default function EditSystemMessage(){
@@ -21,9 +24,11 @@ export default function EditSystemMessage(){
             })
             if (response.ok){
                 const responseData = await response.json()
-                console.log(responseData.access_token)
                 setToken(responseData.access_token)
-                localStorage.setItem('synclite_token',responseData.access_token)
+                localStorage.setItem('synclite_token',JSON.stringify({
+                    token: responseData.access_token,
+                    expiration: new Date(Date.now() + 24 * 60 * 60 * 1000)
+                }))
                 alert('login successful')
             }
         }
@@ -33,11 +38,21 @@ export default function EditSystemMessage(){
         }
     }
     useEffect(()=>{
-        const localToken = localStorage.getItem('synclite_token')
-        if (localToken){
-            setToken(localToken)
+        const now:Date = new Date()
+        const localdata = localStorage.getItem('synclite_token')
+        if (localdata) {
+        const localToken = JSON.parse(localdata);
+        const expirationDate = new Date(localToken.expiration); // Convert string back to Date
+        
+        if (now < expirationDate) { // Check if token is still valid (not expired)
+            setToken(localToken.token); // Set the token, not the whole object
+        } else {
+            // Token expired, remove it
+            localStorage.removeItem('synclite_token');
+            setToken('')
         }
-    })
+    } 
+    },[token,apiUrl])
     
     return (
     <div className="bg-gray-800 h-screen text-white">

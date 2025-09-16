@@ -22,10 +22,19 @@ export default function SystemMessageComponent({token}:SystemMessageProps ){
     const apiUrl = process.env.NEXT_PUBLIC_API_URL
 
     const sectionConfig = {
+        'use-RAG': {
+            value: useRagPrompt,
+            setter: setUseRagPrompt,
+            label: 'Knowledge Base',
+            name: 'Промпт классификации сообщений',
+            placeholder: 'Enter the knowledge base prompt...',
+            icon: '📚'
+        },
         'system-message': {
             value: system_message,
             setter: setSystemMessage,
             label: 'System Message',
+            name: "Системный промпт",
             placeholder: 'Enter the system message for the AI agent...',
             icon: '⚙️'
         },
@@ -33,16 +42,10 @@ export default function SystemMessageComponent({token}:SystemMessageProps ){
             value: lead_discovery_prompt,
             setter: setLeadDiscovery,
             label: 'Lead Discovery',
+            name: 'Промптначальных сообщений',
             placeholder: 'Enter the lead discovery prompt...',
             icon: '🔍'
-        },
-        'use-RAG': {
-            value: useRagPrompt,
-            setter: setUseRagPrompt,
-            label: 'Knowledge Base',
-            placeholder: 'Enter the knowledge base prompt...',
-            icon: '📚'
-        }
+        }   
     }
 
     const currentSection = sectionConfig[activeSection]
@@ -54,6 +57,8 @@ export default function SystemMessageComponent({token}:SystemMessageProps ){
         try {
             const formData = new FormData()
             formData.append('message', currentSection.value)
+            formData.append('label', currentSection.label)
+
             const response = await fetch(`${apiUrl}/edit-system-message`,{
                 method: 'post',
                 body: formData,
@@ -124,7 +129,7 @@ export default function SystemMessageComponent({token}:SystemMessageProps ){
                                 onClick={() => setActiveSection(key as SelectedSection)}
                             >
                                 <span className="text-lg">{config.icon}</span>
-                                <span className="hidden sm:inline">{config.label}</span>
+                                <span className="hidden sm:inline">{config.name}</span>
                             </button>
                         ))}
                     </div>
@@ -135,7 +140,7 @@ export default function SystemMessageComponent({token}:SystemMessageProps ){
                     <div className="bg-gray-750 px-6 py-4 border-b border-gray-700">
                         <h2 className="text-xl font-semibold text-white flex items-center gap-2">
                             <span className="text-2xl">{currentSection.icon}</span>
-                            {currentSection.label}
+                            {currentSection.name}
                         </h2>
                     </div>
 
