@@ -11,7 +11,7 @@ interface PromptResponse {
     lead_discovery_prompt: string
     use_rag_prompt: string
 }
-type SelectedSection = 'system-message' | 'lead-discovery' | 'use-RAG'
+type SelectedSection = 'system-message' | 'use-RAG'
 
 export default function SystemMessageComponent({token}:SystemMessageProps ){
     const [activeSection, setActiveSection]= useState<SelectedSection>('system-message')
@@ -37,15 +37,7 @@ export default function SystemMessageComponent({token}:SystemMessageProps ){
             name: "Системный промпт",
             placeholder: 'Enter the system message for the AI agent...',
             icon: '⚙️'
-        },
-        'lead-discovery': {
-            value: lead_discovery_prompt,
-            setter: setLeadDiscovery,
-            label: 'Lead Discovery',
-            name: 'Промптначальных сообщений',
-            placeholder: 'Enter the lead discovery prompt...',
-            icon: '🔍'
-        }   
+        }
     }
 
     const currentSection = sectionConfig[activeSection]
