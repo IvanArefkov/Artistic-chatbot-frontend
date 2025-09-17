@@ -1,5 +1,5 @@
 'use client'
-type tokenDataType = {
+export type tokenDataType = {
     token: string,
     expiration: Date
 } 

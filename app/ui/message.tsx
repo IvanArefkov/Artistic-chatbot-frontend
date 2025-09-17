@@ -16,7 +16,7 @@ export default function Message({sender, created_at = new Date(), content}: Mess
     return (
          <div className={`flex items-end text-gray-700 ${sender === 'User' ? 'justify-end': ''}`}>
             {sender === 'User' && <p className='text-sm opacity-50 p-1'>{formatTime(created_at)}</p>}
-            <div className={`${sender === 'Consultant' ? 'consultant-message': 'user-message'} m-2 p-2 max-w-68 text-gray-700` }>
+            <div className={`${sender === 'Consultant' ? 'consultant-message': 'user-message'} whitespace-pre-wrap m-2 p-2 max-w-68 text-gray-700` } >
                 <p>{content}</p>
             </div>
             {sender === 'Consultant' && <p className='text-sm opacity-50 p-1'>{formatTime(created_at)}</p>}

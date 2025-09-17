@@ -50,6 +50,7 @@ body {
 }
 .consultant-message {
   border: 2px solid var(--accent-custom);
+  white-space: pre-wrap;
 }
 .user-message {
   background-color: var(--accent-custom);
