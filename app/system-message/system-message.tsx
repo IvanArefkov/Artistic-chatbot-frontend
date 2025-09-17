@@ -2,8 +2,9 @@
 
 import { FormEvent, useState, useEffect } from "react"
 import { spectral } from "@/app/fonts"
+import Link from "next/link";
 
-interface SystemMessageProps {
+export type SystemMessageProps = {
     token: string;
 }
 interface PromptResponse {
@@ -98,6 +99,7 @@ export default function SystemMessageComponent({token}:SystemMessageProps ){
         <div className={`min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 ${spectral.className}`}>
             <div className="max-w-4xl mx-auto p-6">
                 {/* Header */}
+                <div className="flex justify-between">
                 <div className="mb-8">
                     <h1 className="text-3xl font-bold text-white mb-2">
                         AI RAG Agent Configuration
@@ -105,7 +107,12 @@ export default function SystemMessageComponent({token}:SystemMessageProps ){
                     <p className="text-gray-300">
                         Configure prompts for Synclite Beauty AI agent
                     </p>
+                    
                 </div>
+                <Link href={'/chats'} className='items-center h-fit shadow-md justify-center gap-2 px-4 py-3 rounded-lg font-medium transition-all duration-200 text-gray-200 bg-gray-600 hover:bg-gray-800 hover:text-white'>
+                        Chats
+                    </Link>
+                    </div>
 
                 {/* Tab Navigation */}
                 <div className="bg-gray-800 rounded-xl shadow-lg border border-gray-700 p-1 mb-6">

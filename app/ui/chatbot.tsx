@@ -7,7 +7,10 @@ import Message from './message';
 import { useState } from 'react';
 import type { MessageType } from '@/app/ui/message'
 import Link from 'next/link'
+import { v4 as uuidv4 } from 'uuid';
+
 gsap.registerPlugin(useGSAP)
+const session_id = uuidv4()
 
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL
@@ -18,6 +21,8 @@ export default function Chatbot(){
     const [inputValue, setinputValue] = useState('')
     const [isLoading, setIsLoading] = useState(false)
     const bottomRef = useRef<HTMLDivElement>(null)
+    
+
 
     
     async function handleSendMessage (){
@@ -47,7 +52,8 @@ export default function Chatbot(){
                 },
                 body: JSON.stringify({
                     history: messageHistory,
-                    message: userMessage
+                    message: userMessage,
+                    session_id: session_id
                 })
             })
         
@@ -91,7 +97,7 @@ export default function Chatbot(){
                 <h2 className={ `${spectral.className} text-title p-4 text-white`}>Онлайн-консультант</h2>
                 <Link className="inline-flex items-center px-3 py-2 border m-4 text-white font-medium text-center rounded-lg hover:bg-[#7a6c54] focus:outline-none focus:ring-2  focus:ring-offset-2 focus:ring-offset-gray-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5" 
                     href="/system-message">
-                    Prompt Editor
+                    Settings
                 </Link>
            </div>
            <div className={`flex-1 overflow-y-scroll no-scrollbar ${fira_sans.className}`}>
